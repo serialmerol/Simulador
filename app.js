@@ -126,21 +126,27 @@ function tirada(){
     document.write("<br>" + "tu tirada es de: " + dice);
     switch (true){
         case final <= 1:
+            alert("tu total es " + final + " eso es un fallo critico");
             document.write("<br>" + "tu total es " + final + " eso es un fallo critico <br>");
             break;
         case final >= 2 && final <= 5:
+            alert("tu total es " + final + " eso es un fallo mayor");
             document.write("<br>" + "tu total es " + final + " eso es un fallo mayor <br>");
             break;
         case final >= 6 && final <= 9:
+            alert("tu total es " + final + " eso es un fallo");
             document.write("<br>" + "tu total es " + final + " eso es un fallo <br>");
             break;
         case final >= 10 && final <= 15:
+            alert("tu total es " + final + " eso es una tirada pasable");
             document.write("<br>" + "tu total es " + final + " eso es una tirada pasable <br>");
             break;
         case final >= 16 && final <= 19:
+            alert("tu total es " + final + " eso es un exito");
             document.write("<br>" + "tu total es " + final + " eso es un exito <br>");
             break;
         case final >= 20:
+            alert("tu total es " + final + " eso es un exito critico!");
             document.write("<br>" + "tu total es " + final + " eso es un exito critico! <br>");
             break;
     }
