@@ -1,11 +1,12 @@
 
 let check = false;
+let checkLocal;
 let stat = 0;
 let char;
 let pers;
 
 if(localStorage.length > 0){
-    check = confirm("Ya existe personaje, quieres crear otro?")
+    checkLocal = confirm("Ya existe personaje, quieres crear otro?")
 }
 class Aventurero{
     constructor(nombre,raza,clase,nivel){
@@ -21,7 +22,7 @@ class Aventurero{
         } while (check == false);
     }
 }
-if (check == false) {
+if (checkLocal == false) {
     pers = JSON.parse( localStorage.getItem('char').split(","));
 } else {
     const newChar = new Aventurero( prompt("Ingresa el nombre del personaje"),
@@ -31,9 +32,7 @@ if (check == false) {
 
 localStorage.setItem('char', JSON.stringify(newChar))
 }
-
-
-;                            
+                            
 show(); //toma los datos guardados, crea divs y los muestra en sus respectivos lugares
 
 const personaje = [ str = {atributo: "Fuerza", valor: 0, modificador: 0,},
