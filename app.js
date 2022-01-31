@@ -1,7 +1,12 @@
+
 let check = false;
 let stat = 0;
 let char;
 let pers;
+
+if(localStorage.length > 0){
+    check = confirm("Ya existe personaje, quieres crear otro?")
+}
 class Aventurero{
     constructor(nombre,raza,clase,nivel){
         this.nombre = nombre.toUpperCase();
@@ -16,35 +21,20 @@ class Aventurero{
         } while (check == false);
     }
 }
-const newChar = new Aventurero( prompt("Ingresa el nombre del personaje"),
+if (check == false) {
+    pers = JSON.parse( localStorage.getItem('char').split(","));
+} else {
+    const newChar = new Aventurero( prompt("Ingresa el nombre del personaje"),
                             prompt("Ingresa la raza del personaje"),
                             prompt("Ingresa la clase del personaje"));
-newChar.lvl();
-localStorage.setItem('char', JSON.stringify(newChar));                            
-show();
-barra();
-function barra(){
-    let nombre = pers.nombre;
-    let nodoNombre = document.createElement("div");
-    nodoNombre.id = "nombre";
-    nodoNombre.innerHTML = nombre;
-    document.getElementById("tituloNombre").appendChild(nodoNombre);
-    let raza = pers.raza;
-    let nodoRaza = document.createElement("div");
-    nodoRaza.id = "raza";
-    nodoRaza.innerHTML = raza;
-    document.getElementById("tituloRaza").appendChild(nodoRaza);
-    let clase = pers.clase;
-    let nodoClase = document.createElement("div");
-    nodoClase.id = "clase";
-    nodoClase.innerHTML = clase;
-    document.getElementById("tituloClase").appendChild(nodoClase);
-    let nivel = pers.nivel;
-    let nodoNivel = document.createElement("div");
-    nodoNivel.id = "nivel";
-    nodoNivel.innerHTML = nivel;
-    document.getElementById("tituloNivel").appendChild(nodoNivel);
+    newChar.lvl(); //funcion para tomar dato de nivel y no salga de los parametros 
+
+localStorage.setItem('char', JSON.stringify(newChar))
 }
+
+
+;                            
+show(); //toma los datos guardados, crea divs y los muestra en sus respectivos lugares
 
 const personaje = [ str = {atributo: "Fuerza", valor: 0, modificador: 0,},
                     dex = {atributo: "Destreza", valor: 0, modificador: 0},
@@ -95,13 +85,28 @@ do {
 
 //funcion que muestra los datos del personaje, usando storage
 function show(){
-    
-    console.log(char);
     pers = JSON.parse( localStorage.getItem('char').split(","));
-    console.log(pers);
-    document.write("tu personaje nivel: " + pers.nivel + " se llama: " + pers.nombre + " es de raza: " + pers.raza + " y es de clase: " + pers.clase +"<br>");
+    let nombre = pers.nombre;
+    let nodoNombre = document.createElement("div");
+    nodoNombre.id = "nombre";
+    nodoNombre.innerHTML = nombre;
+    document.getElementById("tituloNombre").appendChild(nodoNombre);
+    let raza = pers.raza;
+    let nodoRaza = document.createElement("div");
+    nodoRaza.id = "raza";
+    nodoRaza.innerHTML = raza;
+    document.getElementById("tituloRaza").appendChild(nodoRaza);
+    let clase = pers.clase;
+    let nodoClase = document.createElement("div");
+    nodoClase.id = "clase";
+    nodoClase.innerHTML = clase;
+    document.getElementById("tituloClase").appendChild(nodoClase);
+    let nivel = pers.nivel;
+    let nodoNivel = document.createElement("div");
+    nodoNivel.id = "nivel";
+    nodoNivel.innerHTML = nivel;
+    document.getElementById("tituloNivel").appendChild(nodoNivel);
 }
-
 //funcion que toma el atributo a tirar y el valor del atributo
 function selector(){
     do {
