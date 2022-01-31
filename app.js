@@ -1,5 +1,7 @@
 let check = false;
 let stat = 0;
+let char;
+let pers;
 class Aventurero{
     constructor(nombre,raza,clase,nivel){
         this.nombre = nombre.toUpperCase();
@@ -13,16 +15,36 @@ class Aventurero{
             chequeo(this.nivel,1,20);
         } while (check == false);
     }
-    show(){
-        document.write("tu personaje nivel: " + this.nivel + " se llama: " + this.nombre + " es de raza: " + this.raza + " y es de clase: " + this.clase +"<br>");
-    
-    }
 }
 const newChar = new Aventurero( prompt("Ingresa el nombre del personaje"),
                             prompt("Ingresa la raza del personaje"),
                             prompt("Ingresa la clase del personaje"));
 newChar.lvl();
-newChar.show();
+localStorage.setItem('char', JSON.stringify(newChar));                            
+show();
+barra();
+function barra(){
+    let nombre = pers.nombre;
+    let nodoNombre = document.createElement("div");
+    nodoNombre.id = "nombre";
+    nodoNombre.innerHTML = nombre;
+    document.getElementById("tituloNombre").appendChild(nodoNombre);
+    let raza = pers.raza;
+    let nodoRaza = document.createElement("div");
+    nodoRaza.id = "raza";
+    nodoRaza.innerHTML = raza;
+    document.getElementById("tituloRaza").appendChild(nodoRaza);
+    let clase = pers.clase;
+    let nodoClase = document.createElement("div");
+    nodoClase.id = "clase";
+    nodoClase.innerHTML = clase;
+    document.getElementById("tituloClase").appendChild(nodoClase);
+    let nivel = pers.nivel;
+    let nodoNivel = document.createElement("div");
+    nodoNivel.id = "nivel";
+    nodoNivel.innerHTML = nivel;
+    document.getElementById("tituloNivel").appendChild(nodoNivel);
+}
 
 const personaje = [ str = {atributo: "Fuerza", valor: 0, modificador: 0,},
                     dex = {atributo: "Destreza", valor: 0, modificador: 0},
@@ -70,6 +92,15 @@ do {
     check = confirm("hacer otra tirada?");
     console.log(check);
 } while (check == true);
+
+//funcion que muestra los datos del personaje, usando storage
+function show(){
+    
+    console.log(char);
+    pers = JSON.parse( localStorage.getItem('char').split(","));
+    console.log(pers);
+    document.write("tu personaje nivel: " + pers.nivel + " se llama: " + pers.nombre + " es de raza: " + pers.raza + " y es de clase: " + pers.clase +"<br>");
+}
 
 //funcion que toma el atributo a tirar y el valor del atributo
 function selector(){
