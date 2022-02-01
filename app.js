@@ -7,6 +7,7 @@ let char; //setitem para datos de personaje en localStorage
 let pers; //getitem de datos de personaje
 let atriset; //setitem para atributos en localStorage
 let atriget; //getitem de atributos
+let nodoHistorial; //creacion de nodo de historial de tiradas
 
 //Checador de localStorage
 if(localStorage.length > 0){
@@ -63,28 +64,28 @@ do {
     selector(); //Selecciona el atributo para el que tiraran los dados
     switch(stat){
         case 0:
-            dados(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            tirada();
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
             break;
         case 1:
-            dados(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            tirada();
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
             break;
         case 2:
-            dados(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            tirada();
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
             break;
         case 3:
-            dados(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            tirada();
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
             break;    
         case 4:
-            dados(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            tirada();
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
             break;
         case 5:
-            dados(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            tirada();
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
             break;
     }
     check = confirm("hacer otra tirada?");
@@ -119,48 +120,17 @@ function show(){
 //Crea los nodos de atributos y crea los nodos de modificadores
 function showAtribute(){
     atriget = JSON.parse( localStorage.getItem('atriset').split(","));
-    let statStr = atriget[0].valor;
-    let modStr = atriget[0].modificador;
-    let nodoStr = document.createElement("div");
-    nodoStr.innerHTML =     ` ${statStr}
-                            <h3>Modificador</h3>
-                            <div> ${modStr} </div>`;
-    document.getElementById("tituloStr").appendChild(nodoStr);
-    let statDex = atriget[1].valor;
-    let modDex = atriget[1].modificador;
-    let nodoDex = document.createElement("div");
-    nodoDex.innerHTML = ` ${statDex}
-                        <h3>Modificador</h3>
-                        <div> ${modDex} </div>`;
-    document.getElementById("tituloDex").appendChild(nodoDex);
-    let statCon = atriget[2].valor;
-    let modCon = atriget[2].modificador;
-    let nodoCon = document.createElement("div");
-    nodoCon.innerHTML = ` ${statCon}
-                        <h3>Modificador</h3>
-                        <div> ${modCon} </div>`;
-    document.getElementById("tituloCon").appendChild(nodoCon);
-    let statInt = atriget[3].valor;
-    let modInt = atriget[3].modificador;
-    let nodoInt = document.createElement("div");
-    nodoInt.innerHTML = ` ${statInt}
-                        <h3>Modificador</h3>
-                        <div> ${modInt} </div>`;
-    document.getElementById("tituloInt").appendChild(nodoInt);
-    let statWis = atriget[4].valor;
-    let modWis = atriget[4].modificador;
-    let nodoWis = document.createElement("div");
-    nodoWis.innerHTML = ` ${statWis}
-                        <h3>Modificador</h3>
-                        <div> ${modWis} </div>`;
-    document.getElementById("tituloWis").appendChild(nodoWis);
-    let statCha = atriget[5].valor;
-    let modCha = atriget[5].modificador;
-    let nodoCha = document.createElement("div");
-    nodoCha.innerHTML = ` ${statCha}
-                        <h3>Modificador</h3>
-                        <div> ${modCha} </div>`;
-    document.getElementById("tituloCha").appendChild(nodoCha);
+    for (const element of atriget) {
+        console.log(element);
+        let nodoatrib = document.createElement("div");
+        nodoatrib.innerHTML = `<div>
+                                <h3> ${element.atributo} </h3>
+                                ${element.valor}
+                                <h3>Modificador</h3>
+                                <div> ${element.modificador} </div>
+                            </div>`;
+        document.getElementById("barraAtributo").appendChild(nodoatrib);
+    }
 }
 
 //funcion que toma el atributo a tirar y el valor del atributo
@@ -202,8 +172,7 @@ function mod(statscore){
 }
 
 //funcion de tirada de dado
-function dados(atri,val, modi){
-    document.write("Tu " + atri + " es de "+ val + " tu modificador es " + modi);
+function dados(){
     check = false;
     do {
         dice = prompt("tira un dado de 20 caras y anota el resultado");
@@ -212,41 +181,64 @@ function dados(atri,val, modi){
 }
 
 //Funcion que determina el exito de la tirada
-function tirada(){
+function tirada(atri, val, modi){
     final = Number(dice) + Number(atriget[stat].modificador);
     console.log(final);
-    document.write("<br>" + "tu tirada es de: " + dice);
     switch (true){
         case final <= 1:
             alert("tu total es " + final + " eso es un fallo critico");
-            document.write("<br>" + "tu total es " + final + " eso es un fallo critico <br>");
+            nodoHistorial = document.createElement("div");
+            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
+                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                        Tu total es ${final} . Eso es un fallo critico`;
+            document.getElementById("barraHistorial").appendChild(nodoHistorial);
             break;
         case final >= 2 && final <= 5:
             alert("tu total es " + final + " eso es un fallo mayor");
-            document.write("<br>" + "tu total es " + final + " eso es un fallo mayor <br>");
+            nodoHistorial = document.createElement("div");
+            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
+                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                        Tu total es ${final} . Eso es un fallo mayor`;
+            document.getElementById("barraHistorial").appendChild(nodoHistorial);
             break;
         case final >= 6 && final <= 9:
             alert("tu total es " + final + " eso es un fallo");
-            document.write("<br>" + "tu total es " + final + " eso es un fallo <br>");
+            nodoHistorial = document.createElement("div");
+            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
+                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                        Tu total es ${final} . Eso es un fallo`;
+            document.getElementById("barraHistorial").appendChild(nodoHistorial);
             break;
         case final >= 10 && final <= 15:
             alert("tu total es " + final + " eso es una tirada pasable");
-            document.write("<br>" + "tu total es " + final + " eso es una tirada pasable <br>");
+            nodoHistorial = document.createElement("div");
+            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
+                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                        Tu total es ${final} . Eso es una tirada pasable`;
+            document.getElementById("barraHistorial").appendChild(nodoHistorial);
             break;
         case final >= 16 && final <= 19:
             alert("tu total es " + final + " eso es un exito");
-            document.write("<br>" + "tu total es " + final + " eso es un exito <br>");
+            nodoHistorial = document.createElement("div");
+            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
+                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                        Tu total es ${final} . Eso es un exito`;
+            document.getElementById("barraHistorial").appendChild(nodoHistorial);
             break;
         case final >= 20:
             alert("tu total es " + final + " eso es un exito critico!");
-            document.write("<br>" + "tu total es " + final + " eso es un exito critico! <br>");
+            nodoHistorial = document.createElement("div");
+            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
+                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                        Tu total es ${final} . Eso es un exito critico!`;
+            document.getElementById("barraHistorial").appendChild(nodoHistorial);
             break;
     }
 }
 
 //arregla el array de atributos usando los valores de mayor a manor
 let statsorter = personaje.sort((a, b) => b.valor - a.valor);
-document.write("estos son tus atributos ordenados de mayor a menor: <br>");
+document.write("<br> estos son tus atributos ordenados de mayor a menor: <br>");
 for (i=0;i<6;i++){
     document.write(" " + statsorter[i].atributo + " : " + statsorter[i].valor);
 }

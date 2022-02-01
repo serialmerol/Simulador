@@ -2,7 +2,7 @@
 h1, h2{
     text-align: center;
 }
-#barra{
+.barra{
     display: flex;
     justify-content: space-evenly;
 }
