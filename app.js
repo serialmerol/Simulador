@@ -5,9 +5,12 @@ let stat = 0;
 let char;
 let pers;
 
+//Checador de localStorage
 if(localStorage.length > 0){
     checkLocal = confirm("Ya existe personaje, quieres crear otro?")
 }
+
+//Objeto para datos del personaje
 class Aventurero{
     constructor(nombre,raza,clase,nivel){
         this.nombre = nombre.toUpperCase();
@@ -22,6 +25,8 @@ class Aventurero{
         } while (check == false);
     }
 }
+
+//toma el booleano del checador de localStorage y dependiendo de la opcion toma los datos guardados o crea nuevo personaje
 if (checkLocal == false) {
     pers = JSON.parse( localStorage.getItem('char').split(","));
 } else {
@@ -29,12 +34,12 @@ if (checkLocal == false) {
                             prompt("Ingresa la raza del personaje"),
                             prompt("Ingresa la clase del personaje"));
     newChar.lvl(); //funcion para tomar dato de nivel y no salga de los parametros 
-
-localStorage.setItem('char', JSON.stringify(newChar))
+    localStorage.setItem('char', JSON.stringify(newChar))
 }
                             
 show(); //toma los datos guardados, crea divs y los muestra en sus respectivos lugares
 
+//array para crear lps atributs del personaje
 const personaje = [ str = {atributo: "Fuerza", valor: 0, modificador: 0,},
                     dex = {atributo: "Destreza", valor: 0, modificador: 0},
                     con = {atributo: "Constitucion", valor: 0, modificador: 0},
@@ -47,11 +52,12 @@ for(i=0;i<6;i++){
         chequeo(personaje[i].valor,6,18); //chequeo de entrada de datos
     } while (check == false);
     mod(personaje[i].valor); //asignacion de modificadores
-    document.write( personaje[i].atributo, " --- ", personaje[i].valor, " --- ", personaje[i].modificador, "<br>");
-}
+    }
+
+showAtribute(); //funcion que muestra atributos y modificadores
 
 do {
-    selector(); //elecciona el atributo para el que tiraran los dados
+    selector(); //Selecciona el atributo para el que tiraran los dados
     switch(stat){
         case 0:
             dados(personaje[stat].atributo, personaje[stat].valor, personaje[stat].modificador);
@@ -106,6 +112,53 @@ function show(){
     nodoNivel.innerHTML = nivel;
     document.getElementById("tituloNivel").appendChild(nodoNivel);
 }
+
+//Crea los nodos de atributos y crea los nodos de modificadores
+function showAtribute(){
+    let statStr = personaje[0].valor;
+    let modStr = personaje[0].modificador;
+    let nodoStr = document.createElement("div");
+    nodoStr.innerHTML =     ` ${statStr}
+                            <h3>Modificador</h3>
+                            <div> ${modStr} </div>`;
+    document.getElementById("tituloStr").appendChild(nodoStr);
+    let statDex = personaje[1].valor;
+    let modDex = personaje[1].modificador;
+    let nodoDex = document.createElement("div");
+    nodoDex.innerHTML = ` ${statDex}
+                        <h3>Modificador</h3>
+                        <div> ${modDex} </div>`;
+    document.getElementById("tituloDex").appendChild(nodoDex);
+    let statCon = personaje[2].valor;
+    let modCon = personaje[2].modificador;
+    let nodoCon = document.createElement("div");
+    nodoCon.innerHTML = ` ${statCon}
+                        <h3>Modificador</h3>
+                        <div> ${modCon} </div>`;
+    document.getElementById("tituloCon").appendChild(nodoCon);
+    let statInt = personaje[3].valor;
+    let modInt = personaje[3].modificador;
+    let nodoInt = document.createElement("div");
+    nodoInt.innerHTML = ` ${statInt}
+                        <h3>Modificador</h3>
+                        <div> ${modInt} </div>`;
+    document.getElementById("tituloInt").appendChild(nodoInt);
+    let statWis = personaje[4].valor;
+    let modWis = personaje[4].modificador;
+    let nodoWis = document.createElement("div");
+    nodoWis.innerHTML = ` ${statWis}
+                        <h3>Modificador</h3>
+                        <div> ${modWis} </div>`;
+    document.getElementById("tituloWis").appendChild(nodoWis);
+    let statCha = personaje[5].valor;
+    let modCha = personaje[5].modificador;
+    let nodoCha = document.createElement("div");
+    nodoCha.innerHTML = ` ${statCha}
+                        <h3>Modificador</h3>
+                        <div> ${modCha} </div>`;
+    document.getElementById("tituloCha").appendChild(nodoCha);
+}
+
 //funcion que toma el atributo a tirar y el valor del atributo
 function selector(){
     do {
