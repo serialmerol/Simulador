@@ -188,6 +188,7 @@ function tirada(atri, val, modi){
         case final <= 1:
             alert("tu total es " + final + " eso es un fallo critico");
             nodoHistorial = document.createElement("div");
+            nodoHistorial.className = "tirada";
             nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
                                         <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                         Tu total es ${final} . Eso es un fallo critico`;
@@ -196,6 +197,7 @@ function tirada(atri, val, modi){
         case final >= 2 && final <= 5:
             alert("tu total es " + final + " eso es un fallo mayor");
             nodoHistorial = document.createElement("div");
+            nodoHistorial.className = "tirada";
             nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
                                         <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                         Tu total es ${final} . Eso es un fallo mayor`;
@@ -204,6 +206,7 @@ function tirada(atri, val, modi){
         case final >= 6 && final <= 9:
             alert("tu total es " + final + " eso es un fallo");
             nodoHistorial = document.createElement("div");
+            nodoHistorial.className = "tirada";
             nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
                                         <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                         Tu total es ${final} . Eso es un fallo`;
@@ -212,6 +215,7 @@ function tirada(atri, val, modi){
         case final >= 10 && final <= 15:
             alert("tu total es " + final + " eso es una tirada pasable");
             nodoHistorial = document.createElement("div");
+            nodoHistorial.className = "tirada";
             nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
                                         <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                         Tu total es ${final} . Eso es una tirada pasable`;
@@ -220,6 +224,7 @@ function tirada(atri, val, modi){
         case final >= 16 && final <= 19:
             alert("tu total es " + final + " eso es un exito");
             nodoHistorial = document.createElement("div");
+            nodoHistorial.className = "tirada";
             nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
                                         <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                         Tu total es ${final} . Eso es un exito`;
@@ -228,6 +233,7 @@ function tirada(atri, val, modi){
         case final >= 20:
             alert("tu total es " + final + " eso es un exito critico!");
             nodoHistorial = document.createElement("div");
+            nodoHistorial.className = "tirada";
             nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
                                         <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                         Tu total es ${final} . Eso es un exito critico!`;
