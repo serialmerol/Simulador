@@ -243,7 +243,7 @@ function tirada(atri, val, modi){
 }
 
 //arregla el array de atributos usando los valores de mayor a manor
-let statsorter = personaje.sort((a, b) => b.valor - a.valor);
+let statsorter = atriget.sort((a, b) => b.valor - a.valor);
 document.write("<br> estos son tus atributos ordenados de mayor a menor: <br>");
 for (i=0;i<6;i++){
     document.write(" " + statsorter[i].atributo + " : " + statsorter[i].valor);
