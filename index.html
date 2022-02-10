@@ -8,6 +8,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div>
+        <form id="creacionPersonaje">
+            <div>
+                <label for="nombre">NOMBRE</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre del personaje" required>
+                <label for="raza">RAZA</label>
+                <input type="text" name="raza" id="raza" placeholder="Raza del personaje" required>
+                <label for="clase">CLASE</label>
+                <select name="clase" id="clase" required>
+                    <option value="" selected disabled hidden>Elige tu clase</option>
+                    <option value="asesino">Asesino</option>
+                    <option value="bardo">Bardo</option>
+                    <option value="cazadorSanguinario">Cazador</option>
+                    <option value="clerigo">Clerigo</option>
+                    <option value="druida">Druida</option>
+                    <option value="guerrero">Guerrero</option>
+                    <option value="ladron">Ladron</option>
+                    <option value="mago">Mago</option>
+                    <option value="monje">Monje</option>
+                    <option value="palalin">Paladin</option>
+                    <option value="pistolero">Pistolero</option>
+                </select>
+                <label for="nivel">NIVEL</label required>
+                <input type="number" id="nivel" min="1" max="20" placeholder="1 a 20">
+            </div>
+            <div>
+                <label for="str">Fuerza</label required>
+                <input type="number" id="str" min="6" max="18" placeholder="6 a 18">
+                <label for="dex">Destreza</label required>
+                <input type="number" id="dex" min="6" max="18" placeholder="6 a 18">
+                <label for="con">Constitucion</label required>
+                <input type="number" id="con" min="6" max="18" placeholder="6 a 18">
+                <label for="int">Inteligencia</label required>
+                <input type="number" id="int" min="6" max="18" placeholder="6 a 18">
+                <label for="wis">Sabiduria</label required>
+                <input type="number" id="wis" min="6" max="18" placeholder="6 a 18">
+                <label for="crs">Carisma</label required>
+                <input type="number" id="crs" min="6" max="18" placeholder="6 a 18">
+            </div>
+            <div>
+                <input type="submit" value="SALVAR PERSONAJE" class="boton" />
+                <input type="reset" value="LIMPIAR CAMPOS" class="boton" />
+            </div>
+        </form>
+
+    </div>
     <h1>Este es un simulador de tiradas de habilidad para Dungeons and Dragons</h1>
     <div>
         <h2>DATOS DEL PERSONAJE</h2>

@@ -38,25 +38,20 @@ const personaje = [ str = {atributo: "Fuerza", valor: 0, modificador: 0,},
                     wis = {atributo: "Sabiduria", valor: 0, modificador: 0},
                     car = {atributo: "Carisma", valor: 0, modificador: 0}]
 
-//toma el booleano del checador de localStorage y dependiendo de la opcion toma los datos guardados o crea nuevo personaje
-if (checkLocal == false) {
-    pers = JSON.parse( localStorage.getItem('char').split(","));
-} else {
-    const newChar = new Aventurero( prompt("Ingresa el nombre del personaje"),
-                            prompt("Ingresa la raza del personaje"),
-                            prompt("Ingresa la clase del personaje"));
-    newChar.lvl(); //funcion para tomar dato de nivel y no salga de los parametros 
-    localStorage.setItem('char', JSON.stringify(newChar))
-    for(i=0;i<6;i++){
-        do {
-            personaje[i].valor = prompt("Ingresa un valor entre 6 y 18 para tu " + personaje[i].atributo);
-            chequeo(personaje[i].valor,6,18); //chequeo de entrada de datos
-        } while (check == false);
-        mod(personaje[i].valor); //asignacion de modificadores
-    }
-    localStorage.setItem('atriset',JSON.stringify(personaje));
+function crearPersonaje(e) {
+    e.preventDefault();
+    let nom = document.querySelector("#nombre").value;
+    let raz = document.querySelector("#raza").value;
+    let cla = document.querySelector("#clase").value;
+    let niv = document.querySelector("#nivel").value;
+    let personaje = [];
+    personaje.push(new Aventurero(nom, raz, cla, niv));
+    localStorage.setItem('char', JSON.stringify(personaje));
 }
-                            
+
+let formulario = document.getElementById("creacionPersonaje");
+formulario.addEventListener("submit", crearPersonaje);
+
 show(); //toma los datos guardados, crea divs y los muestra en sus respectivos lugares
 showAtribute(); //funcion que muestra atributos y modificadores
 
@@ -94,25 +89,25 @@ do {
 
 //funcion que muestra los datos del personaje, usando storage
 function show(){
-    pers = JSON.parse( localStorage.getItem('char').split(","));
-    let nombre = pers.nombre;
+    pers = JSON.parse( localStorage.getItem('char'));
+
+    let nombre = pers[0].nombre;
     let nodoNombre = document.createElement("div");
-    nodoNombre.id = "nombre";
     nodoNombre.innerHTML = nombre;
     document.getElementById("tituloNombre").appendChild(nodoNombre);
-    let raza = pers.raza;
+
+    let raza = pers[0].raza;
     let nodoRaza = document.createElement("div");
-    nodoRaza.id = "raza";
     nodoRaza.innerHTML = raza;
     document.getElementById("tituloRaza").appendChild(nodoRaza);
-    let clase = pers.clase;
+
+    let clase = pers[0].clase;
     let nodoClase = document.createElement("div");
-    nodoClase.id = "clase";
     nodoClase.innerHTML = clase;
     document.getElementById("tituloClase").appendChild(nodoClase);
-    let nivel = pers.nivel;
+
+    let nivel = pers[0].nivel;
     let nodoNivel = document.createElement("div");
-    nodoNivel.id = "nivel";
     nodoNivel.innerHTML = nivel;
     document.getElementById("tituloNivel").appendChild(nodoNivel);
 }
