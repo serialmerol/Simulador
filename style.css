@@ -2,9 +2,21 @@
 h1, h2{
     text-align: center;
 }
+.oculto{
+    display: none;
+}
 .barra{
     display: flex;
     justify-content: space-evenly;
+    margin: .3rem;
+}
+.datos{
+    display: flex;
+    flex-direction: column;
+}
+.boton{
+    align-self: center;
+    margin: .5rem;
 }
 .tirada{
     border: 2px solid;
@@ -14,4 +26,8 @@ h1, h2{
     border: 1px solid;
     border-radius: .5rem;
     padding: 2rem;
+}
+.historial{
+    display: flex;
+    flex-direction: column-reverse;
 }

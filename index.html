@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <form id="creacionPersonaje">
-            <div>
+    <header>
+        <button id="nuevoPersonaje">Click aqui para crear personaje</button>
+    </header>
+    <div id="llenadoDatos" class="oculto">
+        <form id="creacionPersonaje" class="datos">
+            <div class="barra">
                 <label for="nombre">NOMBRE</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre del personaje" required>
                 <label for="raza">RAZA</label>
@@ -20,7 +23,7 @@
                     <option value="" selected disabled hidden>Elige tu clase</option>
                     <option value="asesino">Asesino</option>
                     <option value="bardo">Bardo</option>
-                    <option value="cazadorSanguinario">Cazador</option>
+                    <option value="cazador">Cazador</option>
                     <option value="clerigo">Clerigo</option>
                     <option value="druida">Druida</option>
                     <option value="guerrero">Guerrero</option>
@@ -30,24 +33,24 @@
                     <option value="palalin">Paladin</option>
                     <option value="pistolero">Pistolero</option>
                 </select>
-                <label for="nivel">NIVEL</label required>
-                <input type="number" id="nivel" min="1" max="20" placeholder="1 a 20">
+                <label for="nivel">NIVEL</label>
+                <input type="number" id="nivel" min="1" max="20" placeholder="1 a 20" required>
             </div>
-            <div>
-                <label for="stat0">Fuerza</label required>
-                <input type="number" id="stat0" min="6" max="18" placeholder="6 a 18">
-                <label for="stat1">Destreza</label required>
-                <input type="number" id="stat1" min="6" max="18" placeholder="6 a 18">
-                <label for="stat2">Constitucion</label required>
-                <input type="number" id="stat2" min="6" max="18" placeholder="6 a 18">
-                <label for="stat3">Inteligencia</label required>
-                <input type="number" id="stat3" min="6" max="18" placeholder="6 a 18">
-                <label for="stat4">Sabiduria</label required>
-                <input type="number" id="stat4" min="6" max="18" placeholder="6 a 18">
-                <label for="stat5">Carisma</label required>
-                <input type="number" id="stat5" min="6" max="18" placeholder="6 a 18">
+            <div class="barra">
+                <label for="stat0">Fuerza</label>
+                <input type="number" id="stat0" min="6" max="18" placeholder="6 a 18" required>
+                <label for="stat1">Destreza</label>
+                <input type="number" id="stat1" min="6" max="18" placeholder="6 a 18" required>
+                <label for="stat2">Constitucion</label>
+                <input type="number" id="stat2" min="6" max="18" placeholder="6 a 18" required>
+                <label for="stat3">Inteligencia</label>
+                <input type="number" id="stat3" min="6" max="18" placeholder="6 a 18" required>
+                <label for="stat4">Sabiduria</label>
+                <input type="number" id="stat4" min="6" max="18" placeholder="6 a 18" required>
+                <label for="stat5">Carisma</label>
+                <input type="number" id="stat5" min="6" max="18" placeholder="6 a 18" required>
             </div>
-            <div>
+            <div class="boton">
                 <input type="submit" value="SALVAR PERSONAJE" class="boton" />
                 <input type="reset" value="LIMPIAR CAMPOS" class="boton" />
             </div>
@@ -79,10 +82,8 @@
                 
             </div>
         </div>
-    <div>
         <h2>HISTORIAL DE TIRADAS</h2>
-        <div id="barraHistorial">
-
+        <div id="barraHistorial" class="historial">
         </div>
     </div>
     <script src="app.js"></script>

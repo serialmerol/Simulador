@@ -12,11 +12,14 @@ let nodoHistorial; //creacion de nodo de historial de tiradas
 
 //Checador y limpiador de localStorage 
 if(localStorage.length > 0){
-    checkLocal = confirm("Ya existe personaje, quieres crear otro?")
+    show();
+    showAtribute();
 }
-if (checkLocal == true){
-    localStorage.clear();
-}
+
+let mostrarMenu = document.getElementById("nuevoPersonaje");
+mostrarMenu.addEventListener("click", mostrarEsconder);
+
+
 //Objeto para datos del personaje
 class Aventurero{
     constructor(nombre,raza,clase,nivel){
@@ -35,15 +38,15 @@ const personaje = [ str = {id: 0, atributo: "Fuerza", valor: 0, modificador: 0,}
                     wis = {id: 4, atributo: "Sabiduria", valor: 0, modificador: 0},
                     car = {id: 5, atributo: "Carisma", valor: 0, modificador: 0}]
 
-//llamada de funcion que crea nuevo personaje y guarda datos en storage
+//funcion que enseña y esconde menu de creacion de personaje
+function mostrarEsconder() {
+    document.getElementById("llenadoDatos").classList.toggle("oculto");
+}
 
+//llamada de funcion que crea nuevo personaje y guarda datos en storage
 let formulario = document.getElementById("creacionPersonaje");
 formulario.addEventListener("submit", crearPersonaje);
 document.getElementById("creacionPersonaje").reset();
-
-show(); //toma los datos guardados, crea divs y los muestra en sus respectivos lugares
-showAtribute(); //funcion que muestra atributos y modificadores
-selector();//Selecciona el atributo para el que tiraran los dados
 
 //funcion que toma los datos del nuevo personaje y los guarda en storage
 function crearPersonaje(e) {
@@ -65,7 +68,12 @@ function crearPersonaje(e) {
         mod(personaje[i].valor);
     }
     localStorage.setItem('atriset', JSON.stringify(personaje));
+    location.reload();
+    show();
+    showAtribute();
 }
+
+selector();
 
 //funcion que muestra los datos del personaje, usando storage
 function show(){
@@ -98,12 +106,12 @@ function showAtribute(){
     for (const element of atriget) {
         console.log(element);
         let nodoatrib = document.createElement("div");
-        nodoatrib.innerHTML = `<div class="tarjetas">
+        nodoatrib.innerHTML = `<div class="tarjetas" id="tarjetas${element.id}">
                                 <h3> ${element.atributo} </h3>
                                 ${element.valor}
                                 <h3>Modificador</h3>
                                 <div> ${element.modificador} </div>
-                                <button id="toss${element.id}" type="button" onclick="">Tira Dado</button>
+                                <button id="toss${element.id}" type="button" onclick="" class="centrar">Tira Dado</button>
                             </div>`;
         document.getElementById("barraAtributo").appendChild(nodoatrib);
     }
