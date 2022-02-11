@@ -2,18 +2,21 @@
 //Variables globales
 let check = false; //checador generico
 let checkLocal; //checador de localStorage
-let stat = 0; //seleccionador de atributo a tirar dado
+let stat; //seleccionador de atributo a tirar dado
 let char; //setitem para datos de personaje en localStorage
 let pers; //getitem de datos de personaje
 let atriset; //setitem para atributos en localStorage
 let atriget; //getitem de atributos
+let tirar; //chechador de boton para tirar dado
 let nodoHistorial; //creacion de nodo de historial de tiradas
 
-//Checador de localStorage
+//Checador y limpiador de localStorage 
 if(localStorage.length > 0){
     checkLocal = confirm("Ya existe personaje, quieres crear otro?")
 }
-
+if (checkLocal == true){
+    localStorage.clear();
+}
 //Objeto para datos del personaje
 class Aventurero{
     constructor(nombre,raza,clase,nivel){
@@ -22,70 +25,47 @@ class Aventurero{
         this.clase = clase.toUpperCase();
         this.nivel = nivel;
     }
-    lvl(){
-        do {
-            this.nivel = prompt("Ingresa el nivel del personaje(tiene que ser entre 1 y 20)")
-            chequeo(this.nivel,1,20);
-        } while (check == false);
-    }
 }
 
 //array para crear los atributos del personaje
-const personaje = [ str = {atributo: "Fuerza", valor: 0, modificador: 0,},
-                    dex = {atributo: "Destreza", valor: 0, modificador: 0},
-                    con = {atributo: "Constitucion", valor: 0, modificador: 0},
-                    int = {atributo: "Inteligencia", valor: 0, modificador: 0},
-                    wis = {atributo: "Sabiduria", valor: 0, modificador: 0},
-                    car = {atributo: "Carisma", valor: 0, modificador: 0}]
+const personaje = [ str = {id: 0, atributo: "Fuerza", valor: 0, modificador: 0,},
+                    dex = {id: 1, atributo: "Destreza", valor: 0, modificador: 0},
+                    con = {id: 2, atributo: "Constitucion", valor: 0, modificador: 0},
+                    int = {id: 3, atributo: "Inteligencia", valor: 0, modificador: 0},
+                    wis = {id: 4, atributo: "Sabiduria", valor: 0, modificador: 0},
+                    car = {id: 5, atributo: "Carisma", valor: 0, modificador: 0}]
 
+//llamada de funcion que crea nuevo personaje y guarda datos en storage
+
+let formulario = document.getElementById("creacionPersonaje");
+formulario.addEventListener("submit", crearPersonaje);
+document.getElementById("creacionPersonaje").reset();
+
+show(); //toma los datos guardados, crea divs y los muestra en sus respectivos lugares
+showAtribute(); //funcion que muestra atributos y modificadores
+selector();//Selecciona el atributo para el que tiraran los dados
+
+//funcion que toma los datos del nuevo personaje y los guarda en storage
 function crearPersonaje(e) {
     e.preventDefault();
     let nom = document.querySelector("#nombre").value;
     let raz = document.querySelector("#raza").value;
     let cla = document.querySelector("#clase").value;
-    let niv = document.querySelector("#nivel").value;
-    let personaje = [];
-    personaje.push(new Aventurero(nom, raz, cla, niv));
-    localStorage.setItem('char', JSON.stringify(personaje));
-}
-
-let formulario = document.getElementById("creacionPersonaje");
-formulario.addEventListener("submit", crearPersonaje);
-
-show(); //toma los datos guardados, crea divs y los muestra en sus respectivos lugares
-showAtribute(); //funcion que muestra atributos y modificadores
-
-do {
-    selector(); //Selecciona el atributo para el que tiraran los dados
-    switch(stat){
-        case 0:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 1:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 2:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 3:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;    
-        case 4:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 5:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
+    let niv = document.querySelector("#nivel").value;    
+    let character = [];
+    character.push(new Aventurero(nom, raz, cla, niv));
+    localStorage.setItem('char', JSON.stringify(character));
+    personaje[0].valor = document.querySelector("#stat0").value;
+    personaje[1].valor = document.querySelector("#stat1").value;
+    personaje[2].valor = document.querySelector("#stat2").value;
+    personaje[3].valor = document.querySelector("#stat3").value;
+    personaje[4].valor = document.querySelector("#stat4").value;
+    personaje[5].valor = document.querySelector("#stat5").value;
+    for(i=0;i<6;i++){
+        mod(personaje[i].valor);
     }
-    check = confirm("hacer otra tirada?");
-    console.log(check);
-} while (check == true);
+    localStorage.setItem('atriset', JSON.stringify(personaje));
+}
 
 //funcion que muestra los datos del personaje, usando storage
 function show(){
@@ -118,11 +98,12 @@ function showAtribute(){
     for (const element of atriget) {
         console.log(element);
         let nodoatrib = document.createElement("div");
-        nodoatrib.innerHTML = `<div>
+        nodoatrib.innerHTML = `<div class="tarjetas">
                                 <h3> ${element.atributo} </h3>
                                 ${element.valor}
                                 <h3>Modificador</h3>
                                 <div> ${element.modificador} </div>
+                                <button id="toss${element.id}" type="button" onclick="">Tira Dado</button>
                             </div>`;
         document.getElementById("barraAtributo").appendChild(nodoatrib);
     }
@@ -130,12 +111,49 @@ function showAtribute(){
 
 //funcion que toma el atributo a tirar y el valor del atributo
 function selector(){
-    do {
-        stat = prompt("Elige el numero de uno de los siguientes atributos: \n 1.Fuerza \n 2.Destreza \n 3.Constitucion \n 4.Inteligencia \n 5.Sabiduria \n 6.Carisma");
-        chequeo(stat,1,6);
-        stat = Number(stat)-1;
-        console.log(stat);
-    } while (check == false);
+    tirar = document.getElementById("toss0");
+    tirar.onclick = () => {stat = 0; console.log(stat); seleccionTirada()}
+    tirar = document.getElementById("toss1"); console.log(stat);
+    tirar.onclick = () => {stat = 1; console.log(stat); seleccionTirada()}
+    tirar = document.getElementById("toss2"); console.log(stat);
+    tirar.onclick = () => {stat = 2; console.log(stat); seleccionTirada()}
+    tirar = document.getElementById("toss3"); console.log(stat);
+    tirar.onclick = () => {stat = 3; console.log(stat); seleccionTirada()}
+    tirar = document.getElementById("toss4"); console.log(stat);
+    tirar.onclick = () => {stat = 4; console.log(stat); seleccionTirada()}
+    tirar = document.getElementById("toss5"); console.log(stat);
+    tirar.onclick = () => {stat = 5; console.log(stat); seleccionTirada()}
+}
+
+//funcion que elige el atributo a tirar
+function seleccionTirada() {
+    switch(stat){
+        case 0:
+            dados();
+            console.log(stat);
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
+            break;
+        case 1:
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
+            break;
+        case 2:
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
+            break;
+        case 3:
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
+            break;    
+        case 4:
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
+            break;
+        case 5:
+            dados();
+            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
+            break;
+    }
 }
 
 //funcion que chequea que la entrada del usuario este dentro de los parametros establecidos
@@ -170,7 +188,7 @@ function mod(statscore){
 function dados(){
     check = false;
     do {
-        dice = prompt("tira un dado de 20 caras y anota el resultado");
+        dice = Math.floor(Math.random() * 20) + 1;
         chequeo(dice,1,20);
     } while (check == false);    
 }
@@ -235,11 +253,4 @@ function tirada(atri, val, modi){
             document.getElementById("barraHistorial").appendChild(nodoHistorial);
             break;
     }
-}
-
-//arregla el array de atributos usando los valores de mayor a manor
-let statsorter = atriget.sort((a, b) => b.valor - a.valor);
-document.write("<br> estos son tus atributos ordenados de mayor a menor: <br>");
-for (i=0;i<6;i++){
-    document.write(" " + statsorter[i].atributo + " : " + statsorter[i].valor);
 }
