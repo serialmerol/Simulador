@@ -1,7 +1,6 @@
 
 //Variables globales
 let check = false; //checador generico
-let checkLocal; //checador de localStorage
 let stat; //seleccionador de atributo a tirar dado
 let char; //setitem para datos de personaje en localStorage
 let pers; //getitem de datos de personaje
@@ -9,15 +8,6 @@ let atriset; //setitem para atributos en localStorage
 let atriget; //getitem de atributos
 let tirar; //chechador de boton para tirar dado
 let nodoHistorial; //creacion de nodo de historial de tiradas
-
-//Checador y limpiador de localStorage 
-if(localStorage.length > 0){
-    show();
-    showAtribute();
-}
-
-let mostrarMenu = document.getElementById("nuevoPersonaje");
-mostrarMenu.addEventListener("click", mostrarEsconder);
 
 
 //Objeto para datos del personaje
@@ -38,15 +28,31 @@ const personaje = [ str = {id: 0, atributo: "Fuerza", valor: 0, modificador: 0,}
                     wis = {id: 4, atributo: "Sabiduria", valor: 0, modificador: 0},
                     car = {id: 5, atributo: "Carisma", valor: 0, modificador: 0}]
 
-//funcion que enseña y esconde menu de creacion de personaje
-function mostrarEsconder() {
-    document.getElementById("llenadoDatos").classList.toggle("oculto");
+//Checador y limpiador de localStorage 
+if(localStorage.length > 0){
+    show();
+    showAtribute();
 }
+
+//Abre menu para hacer nuevo personaje
+let mostrarMenu = document.getElementById("nuevoPersonaje");
+mostrarMenu.addEventListener("click", mostrarEsconder);
 
 //llamada de funcion que crea nuevo personaje y guarda datos en storage
 let formulario = document.getElementById("creacionPersonaje");
 formulario.addEventListener("submit", crearPersonaje);
 document.getElementById("creacionPersonaje").reset();
+
+//llama funcio que hace las tiradas de dados
+selector(); 
+
+//-------------------------FUNCIONEs----------------------------------------------------------//
+
+
+//funcion que enseña y esconde menu de creacion de personaje
+function mostrarEsconder() {
+    document.getElementById("llenadoDatos").classList.toggle("oculto");
+}
 
 //funcion que toma los datos del nuevo personaje y los guarda en storage
 function crearPersonaje(e) {
@@ -72,8 +78,6 @@ function crearPersonaje(e) {
     show();
     showAtribute();
 }
-
-selector();
 
 //funcion que muestra los datos del personaje, usando storage
 function show(){
