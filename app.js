@@ -122,7 +122,7 @@ function chequeo(entrada,bajo,alto){
     if (entrada>=bajo && entrada<=alto) {
         check = true;
     } else {
-        alert("Opcion invalida. Repetir proceso")
+        swal("Opcion invalida. Repetir proceso")
     }
 }
 
@@ -168,15 +168,15 @@ function tirada(atri, val, modi){
     console.log(final);
     switch (true){
         case final <= 1:
-            alert("tu total es " + final + " eso es un fallo critico");
+            swal("tu total es " + final + " eso es un fallo critico");
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <>Tu total es ${final} . Eso es un fallo critico
+                                                <p>Tu total es ${final} . Eso es un fallo critico</p>
                                             </div>`)
             break;
         case final >= 2 && final <= 5:
-            alert("tu total es " + final + " eso es un fallo mayor");
+            swal("tu total es " + final + " eso es un fallo mayor");
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -184,7 +184,7 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 6 && final <= 9:
-            alert("tu total es " + final + " eso es un fallo");
+            swal("tu total es " + final + " eso es un fallo");
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -192,7 +192,7 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 10 && final <= 15:
-            alert("tu total es " + final + " eso es una tirada pasable");
+            swal("tu total es " + final + " eso es una tirada pasable");
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -200,7 +200,7 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 16 && final <= 19:
-            alert("tu total es " + final + " eso es un exito");
+            swal("tu total es " + final + " eso es un exito");
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -208,7 +208,7 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 20:
-            alert("tu total es " + final + " eso es un exito critico!");
+            swal("tu total es " + final + " eso es un exito critico!");
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
