@@ -14,7 +14,7 @@
         <button id="nuevoPersonaje">Click aqui para crear personaje</button>
     </header>
     <div id="llenadoDatos" class="oculto">
-        <form id="creacionPersonaje" class="datos">
+        <form id="creacionPersonaje" class="datosin">
             <div class="barra">
                 <label for="nombre">NOMBRE</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre del personaje" required>
@@ -61,7 +61,7 @@
     </div>
     <h1>Este es un simulador de tiradas de habilidad para Dungeons and Dragons</h1>
     <div id="informacion">    
-        <div>
+        <div class="datos">
             <h2>DATOS DEL PERSONAJE</h2>
             <div id="barra" class="barra">
                 <div id="tituloNombre">
@@ -84,10 +84,11 @@
                 
             </div>
         </div>
+    </div>    
         <h2>HISTORIAL DE TIRADAS</h2>
         <div id="barraHistorial" class="historial">
         </div>
-    </div>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="app.js"></script>

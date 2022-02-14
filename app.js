@@ -168,7 +168,8 @@ function tirada(atri, val, modi){
     console.log(final);
     switch (true){
         case final <= 1:
-            swal("tu total es " + final + " eso es un fallo critico");
+            swal(   {title: atriget[stat].atributo,
+                    text: "tu total es " + final + " eso es un fallo critico"});
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -176,7 +177,8 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 2 && final <= 5:
-            swal("tu total es " + final + " eso es un fallo mayor");
+            swal(   {title: atriget[stat].atributo,
+                    text: "tu total es " + final + " eso es un fallo mayor"});
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -184,7 +186,8 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 6 && final <= 9:
-            swal("tu total es " + final + " eso es un fallo");
+            swal(   {title: atriget[stat].atributo,
+                    text: "tu total es " + final + " eso es un fallo"});
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -192,7 +195,8 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 10 && final <= 15:
-            swal("tu total es " + final + " eso es una tirada pasable");
+            swal(   {title: atriget[stat].atributo,
+                    text: "tu total es " + final + " eso es una tirada pasable"});
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -200,7 +204,8 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 16 && final <= 19:
-            swal("tu total es " + final + " eso es un exito");
+            swal(   {title: atriget[stat].atributo,
+                    text: "tu total es " + final + " eso es un exito!"});
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
@@ -208,7 +213,8 @@ function tirada(atri, val, modi){
                                             </div>`)
             break;
         case final >= 20:
-            swal("tu total es " + final + " eso es un exito critico!");
+            swal(   {title: atriget[stat].atributo,
+                    text: "tu total es " + final + " eso es un EXITO CRITICO!"});
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
