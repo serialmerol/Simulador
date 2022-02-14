@@ -1,4 +1,3 @@
-
 //Variables globales
 let check = false; //checador generico
 let stat; //seleccionador de atributo a tirar dado
@@ -8,6 +7,7 @@ let atriset; //setitem para atributos en localStorage
 let atriget; //getitem de atributos
 let tirar; //chechador de boton para tirar dado
 let nodoHistorial; //creacion de nodo de historial de tiradas
+
 
 
 //Objeto para datos del personaje
@@ -28,6 +28,8 @@ const personaje = [ str = {id: 0, atributo: "Fuerza", valor: 0, modificador: 0,}
                     wis = {id: 4, atributo: "Sabiduria", valor: 0, modificador: 0},
                     car = {id: 5, atributo: "Carisma", valor: 0, modificador: 0}]
 
+//---------------------RUN-----------------------------------------------------------------------//
+
 //Checador y limpiador de localStorage 
 if(localStorage.length > 0){
     show();
@@ -43,10 +45,10 @@ let formulario = document.getElementById("creacionPersonaje");
 formulario.addEventListener("submit", crearPersonaje);
 document.getElementById("creacionPersonaje").reset();
 
-//llama funcio que hace las tiradas de dados
+//llama funcion que hace las tiradas de dados
 selector(); 
 
-//-------------------------FUNCIONEs----------------------------------------------------------//
+//-------------------------FUNCIONES----------------------------------------------------------//
 
 
 //funcion que enseña y esconde menu de creacion de personaje
@@ -82,26 +84,10 @@ function crearPersonaje(e) {
 //funcion que muestra los datos del personaje, usando storage
 function show(){
     pers = JSON.parse( localStorage.getItem('char'));
-
-    let nombre = pers[0].nombre;
-    let nodoNombre = document.createElement("div");
-    nodoNombre.innerHTML = nombre;
-    document.getElementById("tituloNombre").appendChild(nodoNombre);
-
-    let raza = pers[0].raza;
-    let nodoRaza = document.createElement("div");
-    nodoRaza.innerHTML = raza;
-    document.getElementById("tituloRaza").appendChild(nodoRaza);
-
-    let clase = pers[0].clase;
-    let nodoClase = document.createElement("div");
-    nodoClase.innerHTML = clase;
-    document.getElementById("tituloClase").appendChild(nodoClase);
-
-    let nivel = pers[0].nivel;
-    let nodoNivel = document.createElement("div");
-    nodoNivel.innerHTML = nivel;
-    document.getElementById("tituloNivel").appendChild(nodoNivel);
+    $("#tituloNombre").append(pers[0].nombre);
+    $("#tituloRaza").append(pers[0].raza);
+    $("#tituloClase").append(pers[0].clase);
+    $("#tituloNivel").append(pers[0].nivel);
 }
 
 //Crea los nodos de atributos y crea los nodos de modificadores
@@ -109,63 +95,25 @@ function showAtribute(){
     atriget = JSON.parse( localStorage.getItem('atriset').split(","));
     for (const element of atriget) {
         console.log(element);
-        let nodoatrib = document.createElement("div");
-        nodoatrib.innerHTML = `<div class="tarjetas" id="tarjetas${element.id}">
-                                <h3> ${element.atributo} </h3>
-                                ${element.valor}
-                                <h3>Modificador</h3>
-                                <div> ${element.modificador} </div>
-                                <button id="toss${element.id}" type="button" onclick="" class="centrar">Tira Dado</button>
-                            </div>`;
-        document.getElementById("barraAtributo").appendChild(nodoatrib);
+        $("#barraAtributo").append(`<div class="tarjetas" id="tarjetas${element.id}">
+                                        <h3> ${element.atributo} </h3>
+                                        ${element.valor}
+                                        <h3>Modificador</h3>
+                                        <div> ${element.modificador} </div>
+                                        <button id="toss${element.id}" type="button" onclick="" class="centrar">Tira Dado</button>
+                                    </div>`)
     }
 }
 
 //funcion que toma el atributo a tirar y el valor del atributo
 function selector(){
-    tirar = document.getElementById("toss0");
-    tirar.onclick = () => {stat = 0; console.log(stat); seleccionTirada()}
-    tirar = document.getElementById("toss1"); console.log(stat);
-    tirar.onclick = () => {stat = 1; console.log(stat); seleccionTirada()}
-    tirar = document.getElementById("toss2"); console.log(stat);
-    tirar.onclick = () => {stat = 2; console.log(stat); seleccionTirada()}
-    tirar = document.getElementById("toss3"); console.log(stat);
-    tirar.onclick = () => {stat = 3; console.log(stat); seleccionTirada()}
-    tirar = document.getElementById("toss4"); console.log(stat);
-    tirar.onclick = () => {stat = 4; console.log(stat); seleccionTirada()}
-    tirar = document.getElementById("toss5"); console.log(stat);
-    tirar.onclick = () => {stat = 5; console.log(stat); seleccionTirada()}
-}
-
-//funcion que elige el atributo a tirar
-function seleccionTirada() {
-    switch(stat){
-        case 0:
-            dados();
-            console.log(stat);
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 1:
+    atriget.forEach(element => {
+        $(`#toss${element.id}`).on('click',()=>{
+            stat = element.id;
             dados();
             tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 2:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 3:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;    
-        case 4:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-        case 5:
-            dados();
-            tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
-            break;
-    }
+        });
+    });
 }
 
 //funcion que chequea que la entrada del usuario este dentro de los parametros establecidos
@@ -181,17 +129,26 @@ function chequeo(entrada,bajo,alto){
 //Funcion que asigna el modificador del stat dependiendo del valor asignado
 function mod(statscore){
     switch (true){
-        case statscore>=6 && statscore<=9:
+        case statscore>=6 && statscore<=7:
+            personaje[i].modificador = -2;
+            break;
+        case statscore>=8 && statscore<=9:
             personaje[i].modificador = -1;
             break;
-        case statscore>=10 && statscore<=13:
+        case statscore>=10 && statscore<=11:
             personaje[i].modificador = 0;
             break;
-        case statscore>=14 && statscore<=17:
+        case statscore>=12 && statscore<=13:
             personaje[i].modificador = 1;
             break;
-        case statscore == 18:
+        case statscore>=14 && statscore<=15:
             personaje[i].modificador = 2;
+            break;
+        case statscore>=16 && statscore<=17:
+            personaje[i].modificador = 3;
+            break;            
+        case statscore == 18:
+            personaje[i].modificador = 4;
             break;
     }
 }
@@ -212,57 +169,51 @@ function tirada(atri, val, modi){
     switch (true){
         case final <= 1:
             alert("tu total es " + final + " eso es un fallo critico");
-            nodoHistorial = document.createElement("div");
-            nodoHistorial.className = "tirada";
-            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
-                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                        Tu total es ${final} . Eso es un fallo critico`;
-            document.getElementById("barraHistorial").appendChild(nodoHistorial);
+            $("#barraHistorial").prepend(`<div class="tirada">
+                                                <p> Tu tirada es de: ${dice} </p>
+                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                <>Tu total es ${final} . Eso es un fallo critico
+                                            </div>`)
             break;
         case final >= 2 && final <= 5:
             alert("tu total es " + final + " eso es un fallo mayor");
-            nodoHistorial = document.createElement("div");
-            nodoHistorial.className = "tirada";
-            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
-                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                        Tu total es ${final} . Eso es un fallo mayor`;
-            document.getElementById("barraHistorial").appendChild(nodoHistorial);
+            $("#barraHistorial").prepend(`<div class="tirada">
+                                                <p> Tu tirada es de: ${dice} </p>
+                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                <p>Tu total es ${final} . Eso es un fallo mayor </p>
+                                            </div>`)
             break;
         case final >= 6 && final <= 9:
             alert("tu total es " + final + " eso es un fallo");
-            nodoHistorial = document.createElement("div");
-            nodoHistorial.className = "tirada";
-            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
-                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                        Tu total es ${final} . Eso es un fallo`;
-            document.getElementById("barraHistorial").appendChild(nodoHistorial);
+            $("#barraHistorial").prepend(`<div class="tirada">
+                                                <p> Tu tirada es de: ${dice} </p>
+                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                <p>Tu total es ${final} . Eso es un fallo </p>
+                                            </div>`)
             break;
         case final >= 10 && final <= 15:
             alert("tu total es " + final + " eso es una tirada pasable");
-            nodoHistorial = document.createElement("div");
-            nodoHistorial.className = "tirada";
-            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
-                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                        Tu total es ${final} . Eso es una tirada pasable`;
-            document.getElementById("barraHistorial").appendChild(nodoHistorial);
+            $("#barraHistorial").prepend(`<div class="tirada">
+                                                <p> Tu tirada es de: ${dice} </p>
+                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                <p>Tu total es ${final} . Eso es una tirada pasable </p>
+                                            </div>`)
             break;
         case final >= 16 && final <= 19:
             alert("tu total es " + final + " eso es un exito");
-            nodoHistorial = document.createElement("div");
-            nodoHistorial.className = "tirada";
-            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
-                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                        Tu total es ${final} . Eso es un exito`;
-            document.getElementById("barraHistorial").appendChild(nodoHistorial);
+            $("#barraHistorial").prepend(`<div class="tirada">
+                                                <p> Tu tirada es de: ${dice} </p>
+                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                <p>Tu total es ${final} . Eso es un exito! </p>
+                                            </div>`)
             break;
         case final >= 20:
             alert("tu total es " + final + " eso es un exito critico!");
-            nodoHistorial = document.createElement("div");
-            nodoHistorial.className = "tirada";
-            nodoHistorial.innerHTML = `<p> Tu tirada es de: ${dice} </p>
-                                        <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                        Tu total es ${final} . Eso es un exito critico!`;
-            document.getElementById("barraHistorial").appendChild(nodoHistorial);
+            $("#barraHistorial").prepend(`<div class="tirada">
+                                                <p> Tu tirada es de: ${dice} </p>
+                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                <p>Tu total es ${final} . Eso es un EXITO CRITICO! </p>
+                                            </div>`)
             break;
     }
 }

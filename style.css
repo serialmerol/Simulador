@@ -29,5 +29,5 @@ h1, h2{
 }
 .historial{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
