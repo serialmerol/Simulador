@@ -36,10 +36,6 @@ if(localStorage.length > 0){
     showAtribute();
 }
 
-//Abre menu para hacer nuevo personaje
-// let mostrarMenu = document.getElementById("nuevoPersonaje");
-// mostrarMenu.addEventListener("click", mostrarEsconder);
-
 //llamada de funcion que crea nuevo personaje y guarda datos en storage
 let formulario = document.getElementById("creacionPersonaje");
 formulario.addEventListener("submit", crearPersonaje);
