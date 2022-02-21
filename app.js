@@ -34,15 +34,13 @@ const personaje = [ str = {id: 0, atributo: "Fuerza", valor: 0, modificador: 0,}
 if(localStorage.length > 0){
     show();
     showAtribute();
+    selector(); 
 }
 
 //llamada de funcion que crea nuevo personaje y guarda datos en storage
 let formulario = document.getElementById("creacionPersonaje");
 formulario.addEventListener("submit", crearPersonaje);
 document.getElementById("creacionPersonaje").reset();
-
-//llama funcion que hace las tiradas de dados
-selector(); 
 
 //-------------------------FUNCIONES----------------------------------------------------------//
 
