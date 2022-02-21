@@ -37,8 +37,8 @@ if(localStorage.length > 0){
 }
 
 //Abre menu para hacer nuevo personaje
-let mostrarMenu = document.getElementById("nuevoPersonaje");
-mostrarMenu.addEventListener("click", mostrarEsconder);
+// let mostrarMenu = document.getElementById("nuevoPersonaje");
+// mostrarMenu.addEventListener("click", mostrarEsconder);
 
 //llamada de funcion que crea nuevo personaje y guarda datos en storage
 let formulario = document.getElementById("creacionPersonaje");
@@ -50,10 +50,64 @@ selector();
 
 //-------------------------FUNCIONES----------------------------------------------------------//
 
+//Funcion que toma datos de DnD5e api para la creacion de personaje
+$(()=>{
+    let xhttp=new XMLHttpRequest()
+    xhttp.open("GET",`https://www.dnd5eapi.co/api/races`)
+    xhttp.send()
+    xhttp.onreadystatechange=function () {
+        if(this.readyState==4 && this.status==200){
+            let tmp=JSON.parse( this.responseText)
+            let datos=(tmp.results)
+            console.log(datos)
+            for (i =0; i< datos.length; i++) {
+                $("#raza").append(`<option value="${datos[i].name}">${datos[i].name}</option>`);
+            }
+        }
+    }
+    xhttp=new XMLHttpRequest()
+    xhttp.open("GET",`https://www.dnd5eapi.co/api/classes`)
+    xhttp.send()
+    xhttp.onreadystatechange=function () {
+        if(this.readyState==4 && this.status==200){
+            tmp=JSON.parse( this.responseText)
+            datos=(tmp.results)
+            console.log(datos)
+            for (i =0; i< datos.length; i++) {
+                $("#clase").append(`<option value="${datos[i].name}">${datos[i].name}</option>`);
+            }
+        }
+    }
+})
 
 //funcion que enseña y esconde menu de creacion de personaje
-function mostrarEsconder() {
-    document.getElementById("llenadoDatos").classList.toggle("oculto");
+$("#nuevoPersonaje").click(function () { 
+    $("#llenadoDatos").slideToggle(1000);        
+});
+
+//funciones de animacion de boton de creacion de personaje
+$(()=>{
+    $("#nuevoPersonaje").hover(function () {
+            $("#nuevoPersonaje").animate({
+                fontSize: '1rem'
+            })        
+        }, function () {
+            $("#nuevoPersonaje").animate({
+                fontSize: '.8rem'
+            })  
+        }
+    );
+})
+
+//funcion de animacion de botones de tirada de dados
+function apretar(boton) {
+    $(`#toss${boton}`).animate({width: "4rem"});
+    $(`#toss${boton}`).animate({width: "5rem"});
+}
+
+//funcion de animacion para historial de tiradas
+function ensenaTirada() {
+    $('.tirada').fadeIn(2000);
 }
 
 //funcion que toma los datos del nuevo personaje y los guarda en storage
@@ -100,7 +154,7 @@ function showAtribute(){
                                         ${element.valor}
                                         <h3>Modificador</h3>
                                         <div> ${element.modificador} </div>
-                                        <button id="toss${element.id}" type="button" onclick="" class="centrar">Tira Dado</button>
+                                        <button id="toss${element.id}" type="button" onclick="" class="btn">Tira Dado</button>
                                     </div>`)
     }
 }
@@ -110,6 +164,7 @@ function selector(){
     atriget.forEach(element => {
         $(`#toss${element.id}`).on('click',()=>{
             stat = element.id;
+            apretar(stat);
             dados();
             tirada(atriget[stat].atributo, atriget[stat].valor, atriget[stat].modificador);
         });
@@ -175,6 +230,7 @@ function tirada(atri, val, modi){
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                                 <p>Tu total es ${final} . Eso es un fallo critico</p>
                                             </div>`)
+            ensenaTirada();
             break;
         case final >= 2 && final <= 5:
             swal(   {title: atriget[stat].atributo,
@@ -184,6 +240,7 @@ function tirada(atri, val, modi){
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                                 <p>Tu total es ${final} . Eso es un fallo mayor </p>
                                             </div>`)
+            ensenaTirada();
             break;
         case final >= 6 && final <= 9:
             swal(   {title: atriget[stat].atributo,
@@ -193,6 +250,7 @@ function tirada(atri, val, modi){
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                                 <p>Tu total es ${final} . Eso es un fallo </p>
                                             </div>`)
+            ensenaTirada();
             break;
         case final >= 10 && final <= 15:
             swal(   {title: atriget[stat].atributo,
@@ -202,6 +260,7 @@ function tirada(atri, val, modi){
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                                 <p>Tu total es ${final} . Eso es una tirada pasable </p>
                                             </div>`)
+            ensenaTirada();
             break;
         case final >= 16 && final <= 19:
             swal(   {title: atriget[stat].atributo,
@@ -211,6 +270,7 @@ function tirada(atri, val, modi){
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                                 <p>Tu total es ${final} . Eso es un exito! </p>
                                             </div>`)
+            ensenaTirada();
             break;
         case final >= 20:
             swal(   {title: atriget[stat].atributo,
@@ -220,6 +280,7 @@ function tirada(atri, val, modi){
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                                 <p>Tu total es ${final} . Eso es un EXITO CRITICO! </p>
                                             </div>`)
+            ensenaTirada();
             break;
     }
 }

@@ -2,6 +2,7 @@
 h1, h2{
     text-align: center;
 }
+
 .oculto{
     display: none;
 }
@@ -35,7 +36,23 @@ h1, h2{
     align-self: center;
     margin: .5rem;
 }
+.btnPers{
+    font-size: .8rem;
+    padding: .5rem;
+    border-radius: .3rem;
+    border-bottom: .3rem solid black ;
+    border-right: .3rem solid black;
+}
+.btn{
+    width: 5rem;
+    font-size: .8rem;
+    padding: .5rem;
+    border-radius: .3rem;
+    border-bottom: .3rem solid black ;
+    border-right: .3rem solid black;
+}
 .tirada{
+    display: none;
     border: 2px solid;
     border-radius: .5rem;
     margin-bottom: .5rem;

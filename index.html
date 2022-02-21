@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <button id="nuevoPersonaje">Click aqui para crear personaje</button>
+        <button id="nuevoPersonaje" class="btnPers">Click aqui para crear personaje</button>
     </header>
     <div id="llenadoDatos" class="oculto">
         <form id="creacionPersonaje" class="datosin">
@@ -19,21 +19,11 @@
                 <label for="nombre">NOMBRE</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre del personaje" required>
                 <label for="raza">RAZA</label>
-                <input type="text" name="raza" id="raza" placeholder="Raza del personaje" required>
-                <label for="clase">CLASE</label>
+                <select name="raza" id="raza" required>
+                    <option value="" selected disabled hidden>Elige tu raza</option>
+                </select>
                 <select name="clase" id="clase" required>
                     <option value="" selected disabled hidden>Elige tu clase</option>
-                    <option value="asesino">Asesino</option>
-                    <option value="bardo">Bardo</option>
-                    <option value="cazador">Cazador</option>
-                    <option value="clerigo">Clerigo</option>
-                    <option value="druida">Druida</option>
-                    <option value="guerrero">Guerrero</option>
-                    <option value="ladron">Ladron</option>
-                    <option value="mago">Mago</option>
-                    <option value="monje">Monje</option>
-                    <option value="palalin">Paladin</option>
-                    <option value="pistolero">Pistolero</option>
                 </select>
                 <label for="nivel">NIVEL</label>
                 <input type="number" id="nivel" min="1" max="20" placeholder="1 a 20" required>
@@ -53,8 +43,8 @@
                 <input type="number" id="stat5" min="6" max="18" placeholder="6 a 18" required>
             </div>
             <div class="boton">
-                <input type="submit" value="SALVAR PERSONAJE" class="boton" />
-                <input type="reset" value="LIMPIAR CAMPOS" class="boton" />
+                <input type="submit" value="SALVAR PERSONAJE" class="btnPers" />
+                <input type="reset" value="LIMPIAR CAMPOS" class="btnPers" />
             </div>
         </form>
 
