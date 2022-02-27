@@ -222,7 +222,8 @@ function tirada(atri, val, modi){
             $("#barraHistorial").prepend(`<div class="tirada">
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <p>Tu total es ${final} . Eso es un fallo critico</p>
+                                                <p>Tu total es ${final} . Eso es un fallo critico. </p>
+                                                <i class="fa-solid fa-poo fa-lg"></i>
                                             </div>`)
             ensenaTirada();
             break;
@@ -273,6 +274,7 @@ function tirada(atri, val, modi){
                                                 <p> Tu tirada es de: ${dice} </p>
                                                 <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
                                                 <p>Tu total es ${final} . Eso es un EXITO CRITICO! </p>
+                                                <i class="fa-brands fa-critical-role fa-lg"></i>
                                             </div>`)
             ensenaTirada();
             break;

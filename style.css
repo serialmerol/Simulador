@@ -8,6 +8,22 @@ h1, h2{
     color: burlywood;
     font-size: 1.5rem;
 }
+
+.social{
+    margin-left: auto;
+    padding-right: 1rem;
+
+}
+a{
+    padding-left: .5rem;
+        text-decoration: none;
+    color: burlywood;
+}
+header{
+    padding-top: 1rem;
+    padding-left: .5rem;
+    display: flex;
+}
 body{
     
     background-color: rgb(13, 18, 36);
@@ -18,10 +34,6 @@ body{
     margin: 0;     
     display: grid;
     grid-template-rows: auto 1fr auto;
-}
-header{
-    padding-top: 1rem;
-    padding-left: .5rem;
 }
 .oculto{
     display: none;
@@ -113,7 +125,4 @@ footer{
 .final{
     margin: 10px;
     display: flex;
-}
-.social{
-    margin-left: auto;
 }
