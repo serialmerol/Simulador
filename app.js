@@ -95,7 +95,7 @@ $(()=>{
 
 //funcion de animacion de botones de tirada de dados
 function apretar(boton) {
-    $(`#toss${boton}`).animate({width: "4rem"});
+    $(`#toss${boton}`).animate({width: "1rem"});
     $(`#toss${boton}`).animate({width: "5rem"});
 }
 
@@ -148,7 +148,7 @@ function showAtribute(){
                                         ${element.valor}
                                         <h3>Modificador</h3>
                                         <div> ${element.modificador} </div>
-                                        <button id="toss${element.id}" type="button" onclick="" class="btn">Tira Dado</button>
+                                        <button id="toss${element.id}" type="button" onclick="" class="btn">Tira Dado<i class="fa-solid fa-dice-d20 dadoIcon"></i></button>
                                     </div>`)
     }
 }

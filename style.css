@@ -1,14 +1,42 @@
 
+*{
+    font-family: 'IM Fell English SC', serif;
+    font-size: 16px;
+}
 h1, h2{
     text-align: center;
+    color: burlywood;
+    font-size: 1.5rem;
 }
-
+body{
+    
+    background-color: rgb(13, 18, 36);
+    background-size: cover;
+    color: #5c4b00;
+    text-shadow: 1px 1px rgb(163, 153, 98);
+    min-height: 100vh; 
+    margin: 0;     
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+header{
+    padding-top: 1rem;
+    padding-left: .5rem;
+}
 .oculto{
     display: none;
+    background-image: url(imagenes/parchment.jpg);
+    background-size: cover;
+    padding: 1rem;
+    margin-top: .5rem;
+    align-self: center;
+    border-radius: 0 .5rem 0 .7rem;
+
 }
 .barra{
     display: flex;
     justify-content: space-evenly;
+    background-color:rgb(60, 60, 60, .8);
     margin: .3rem;
     border: 1px solid;
     padding-top: .5rem;
@@ -17,6 +45,7 @@ h1, h2{
 }
 #informacion{
     border: 2px solid;
+    background-image: url(imagenes/stone.jpg);
     border-radius: .5rem;
     padding-bottom: .5rem;
 }
@@ -33,7 +62,7 @@ h1, h2{
     padding-bottom: 1rem;
 }
 .boton{
-    align-self: center;
+    justify-content: center;
     margin: .5rem;
 }
 .btnPers{
@@ -53,16 +82,38 @@ h1, h2{
 }
 .tirada{
     display: none;
-    border: 2px solid;
-    border-radius: .5rem;
+    background-image: url(imagenes/parchment.jpg);
+    background-size: cover;
+    font-size: larger;
+    font-weight: bolder;
+    color: #3b0c0c;
+    text-shadow: 1px 1px orangered;
+    text-align: center;
     margin-bottom: .5rem;
+    width: 80%;
+    align-self: center;
+    border-radius: 0 .5rem 0 .7rem;
 }.tarjetas{
     border: 1px solid;
     border-radius: .5rem;
     padding: 2rem;
+    background-color:rgb(50, 50, 50, .8);
     box-shadow: .5rem .5rem .5rem gray;
 }
 .historial{
     display: flex;
     flex-direction: column;
+}
+footer{
+    min-height:40px;
+    border-top: 2px solid;
+    background-color: black;
+    color: azure;
+}
+.final{
+    margin: 10px;
+    display: flex;
+}
+.social{
+    margin-left: auto;
 }

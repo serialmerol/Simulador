@@ -4,83 +4,95 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <script src="https://kit.fontawesome.com/cd11a3ddd2.js" crossorigin="anonymous"></script>
     <title>Simulador DnD</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <button id="nuevoPersonaje" class="btnPers">Click aqui para crear personaje</button>
+        <button id="nuevoPersonaje" class="btnPers">Click aqui para crear personaje <i class="fa-brands fa-d-and-d"></i></button>
     </header>
-    <div id="llenadoDatos" class="oculto">
-        <form id="creacionPersonaje" class="datosin">
-            <div class="barra">
-                <label for="nombre">NOMBRE</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre del personaje" required>
-                <label for="raza">RAZA</label>
-                <select name="raza" id="raza" required>
-                    <option value="" selected disabled hidden>Elige tu raza</option>
-                </select>
-                <select name="clase" id="clase" required>
-                    <option value="" selected disabled hidden>Elige tu clase</option>
-                </select>
-                <label for="nivel">NIVEL</label>
-                <input type="number" id="nivel" min="1" max="20" placeholder="1 a 20" required>
-            </div>
-            <div class="barra">
-                <label for="stat0">Fuerza</label>
-                <input type="number" id="stat0" min="6" max="18" placeholder="6 a 18" required>
-                <label for="stat1">Destreza</label>
-                <input type="number" id="stat1" min="6" max="18" placeholder="6 a 18" required>
-                <label for="stat2">Constitucion</label>
-                <input type="number" id="stat2" min="6" max="18" placeholder="6 a 18" required>
-                <label for="stat3">Inteligencia</label>
-                <input type="number" id="stat3" min="6" max="18" placeholder="6 a 18" required>
-                <label for="stat4">Sabiduria</label>
-                <input type="number" id="stat4" min="6" max="18" placeholder="6 a 18" required>
-                <label for="stat5">Carisma</label>
-                <input type="number" id="stat5" min="6" max="18" placeholder="6 a 18" required>
-            </div>
-            <div class="boton">
-                <input type="submit" value="SALVAR PERSONAJE" class="btnPers" />
-                <input type="reset" value="LIMPIAR CAMPOS" class="btnPers" />
-            </div>
-        </form>
+    <main>
+        <div id="llenadoDatos" class="oculto">
+            <form id="creacionPersonaje" class="datosin">
+                <div class="barra">
+                    <label for="nombre">NOMBRE</label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre del personaje" required>
+                    <label for="raza">RAZA</label>
+                    <select name="raza" id="raza" required>
+                        <option value="" selected disabled hidden>Elige tu raza</option>
+                    </select>
+                    <select name="clase" id="clase" required>
+                        <option value="" selected disabled hidden>Elige tu clase</option>
+                    </select>
+                    <label for="nivel">NIVEL</label>
+                    <input type="number" id="nivel" min="1" max="20" placeholder="1 a 20" required>
+                </div>
+                <div class="barra">
+                    <label for="stat0">Fuerza</label>
+                    <input type="number" id="stat0" min="6" max="18" placeholder="6 a 18" required>
+                    <label for="stat1">Destreza</label>
+                    <input type="number" id="stat1" min="6" max="18" placeholder="6 a 18" required>
+                    <label for="stat2">Constitucion</label>
+                    <input type="number" id="stat2" min="6" max="18" placeholder="6 a 18" required>
+                    <label for="stat3">Inteligencia</label>
+                    <input type="number" id="stat3" min="6" max="18" placeholder="6 a 18" required>
+                    <label for="stat4">Sabiduria</label>
+                    <input type="number" id="stat4" min="6" max="18" placeholder="6 a 18" required>
+                    <label for="stat5">Carisma</label>
+                    <input type="number" id="stat5" min="6" max="18" placeholder="6 a 18" required>
+                </div>
+                <div class="boton">
+                    <input type="submit" value="SALVAR PERSONAJE" class="btnPers" />
+                    <input type="reset" value="LIMPIAR CAMPOS" class="btnPers" />
+                </div>
+            </form>
 
-    </div>
-    <h1>Este es un simulador de tiradas de habilidad para Dungeons and Dragons</h1>
-    <div id="informacion">    
-        <div class="datos">
-            <h2>DATOS DEL PERSONAJE</h2>
-            <div id="barra" class="barra">
-                <div id="tituloNombre">
-                    <p>NOMBRE</p>
-                </div>
-                <div id="tituloRaza">
-                    <p>RAZA</p>
-                </div>
-                <div id="tituloClase">
-                    <p>CLASE</p>
-                </div>
-                <div id="tituloNivel">
-                    <p>NIVEL</p>
+        </div>
+        <h1>Simulador de tiradas de habilidad para Dungeons & Dragons</h1>
+        <div id="informacion">    
+            <div class="datos">
+                <h2>Datos del personaje</h2>
+                <div id="barra" class="barra">
+                    <div id="tituloNombre">
+                        <h3>NOMBRE</h3>
+                    </div>
+                    <div id="tituloRaza">
+                        <h3>RAZA</h3>
+                    </div>
+                    <div id="tituloClase">
+                        <h3>CLASE</h3>
+                    </div>
+                    <div id="tituloNivel">
+                        <h3>NIVEL</h3>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <h2>ATRIBUTOS</h2>
-            <div id="barraAtributo" class="barra">
-                
+            <div>
+                <h2>Atributos</h2>
+                <div id="barraAtributo" class="barra">
+                    
+                </div>
+            </div>
+        </div>    
+            <h2>Historial de Tiradas</h2>
+            <div id="barraHistorial" class="historial">
+            </div>
+    </main>
+    <footer>
+        <div class="final">
+            <span>Powered by Merol von Met 2022</span>
+            <div class="social">
+                <a href="http://">github</a>
+                <a href="http://">linkedin</a> 
+                <a href="http://">deviant</a>
+                <a href="http://">insta</a>
             </div>
         </div>
-    </div>    
-        <h2>HISTORIAL DE TIRADAS</h2>
-        <div id="barraHistorial" class="historial">
-        </div>
-    
+    </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script src="app.js"></script>
 </body>
 </html>
