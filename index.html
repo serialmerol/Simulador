@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-----------Use el Header para poner el boton que enseña o esconde el formulario de creacion de personaje-->    
     <header>
         <button id="nuevoPersonaje" class="btnPers">Click aqui para crear personaje <i class="fa-brands fa-d-and-d"></i></button>
         <div class="social">
@@ -21,16 +23,18 @@
         </div>
     </header>
     <main>
+        
+<!--------------------------------Div oculto que toma los datos a almacenar en local storage---------------->        
         <div id="llenadoDatos" class="oculto">
             <form id="creacionPersonaje" class="datosin">
                 <div class="barra">
                     <label for="nombre">NOMBRE</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombre del personaje" required>
                     <label for="raza">RAZA</label>
-                    <select name="raza" id="raza" required>
+                    <select name="raza" id="raza" required> <!--Estos datos son tomados de la DnD5eapi-->
                         <option value="" selected disabled hidden>Elige tu raza</option>
                     </select>
-                    <select name="clase" id="clase" required>
+                    <select name="clase" id="clase" required> <!--Estos datos son tomados de la DnD5eapi-->
                         <option value="" selected disabled hidden>Elige tu clase</option>
                     </select>
                     <label for="nivel">NIVEL</label>
@@ -55,8 +59,9 @@
                     <input type="reset" value="LIMPIAR CAMPOS" class="btnPers" />
                 </div>
             </form>
-
         </div>
+
+<!--------------------------------Aqui se muestran los datos del personaje guardados en el local Storage---->
         <h1>Simulador de tiradas de habilidad para Dungeons & Dragons</h1>
         <div id="informacion">    
             <div class="datos">
@@ -76,23 +81,30 @@
                     </div>
                 </div>
             </div>
+
+<!--------------------------------Aqui se mostraran los atributos guardados en el Local Storage------------->            
             <div>
                 <h2>Atributos</h2>
                 <div id="barraAtributo" class="barra">
                     
                 </div>
             </div>
+
+<!--------------------------------En esta parte se crearan los divs con las tiradas hechas------------------>            
         </div>    
             <h2>Historial de Tiradas</h2>
             <div id="barraHistorial" class="historial">
             </div>
     </main>
+
+<!--------------------------------Inicio footer------------------------------------------------------------->    
     <footer>
         <div class="final">
             <span>Powered by Merol von Met 2022</span>
-
         </div>
     </footer>
+
+<!--------------------------------Scripts de Jquery y JS---------------------------------------------------->    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="app.js"></script>
 </body>

@@ -8,11 +8,9 @@ h1, h2{
     color: burlywood;
     font-size: 1.5rem;
 }
-
 .social{
     margin-left: auto;
     padding-right: 1rem;
-
 }
 a{
     padding-left: .5rem;
@@ -24,8 +22,7 @@ header{
     padding-left: .5rem;
     display: flex;
 }
-body{
-    
+body{    
     background-color: rgb(13, 18, 36);
     background-size: cover;
     color: #5c4b00;
@@ -43,7 +40,6 @@ body{
     margin-top: .5rem;
     align-self: center;
     border-radius: 0 .5rem 0 .7rem;
-
 }
 .barra{
     display: flex;
