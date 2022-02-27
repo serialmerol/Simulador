@@ -1,6 +1,6 @@
 # Simulador
 
-serialmerol.github.io/simulador/
+https://serialmerol.github.io/Simulador/
 
 Simulador de tiradas de dados para DnD
 Proyecto para clase de Javascript de Coderhouse.
