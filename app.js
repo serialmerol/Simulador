@@ -8,8 +8,6 @@ let atriget; //getitem de atributos
 let tirar; //chechador de boton para tirar dado
 let nodoHistorial; //creacion de nodo de historial de tiradas
 
-
-
 //Objeto para datos del personaje
 class Aventurero{
     constructor(nombre,raza,clase,nivel){
@@ -213,70 +211,92 @@ function dados(){
 
 //Funcion que determina el exito de la tirada
 function tirada(atri, val, modi){
-    final = Number(dice) + Number(atriget[stat].modificador);
-    console.log(final);
-    switch (true){
-        case final <= 1:
+    if (dice == 20 || dice == 1) {
+        if (dice == 20) {
             swal(   {title: atriget[stat].atributo,
-                    text: "tu total es " + final + " eso es un fallo critico"});
+                text: "Es es un " + dice + " natural!!!!"});
             $("#barraHistorial").prepend(`<div class="tirada">
-                                                <p> Tu tirada es de: ${dice} </p>
-                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <p>Tu total es ${final} . Eso es un fallo critico. </p>
-                                                <i class="fa-solid fa-poo fa-lg"></i>
-                                            </div>`)
-            ensenaTirada();
-            break;
-        case final >= 2 && final <= 5:
+                                            <p> Tu tirada es de: ${dice} </p>
+                                            <p> ES NATURAL!!!!! </p>
+                                            <p>Eso es un EXITO CRITICO TOTAL! </p>
+                                            <i class="fa-brands fa-critical-role fa-lg"></i>
+                                        </div>`)
+        ensenaTirada();
+        } else {
             swal(   {title: atriget[stat].atributo,
-                    text: "tu total es " + final + " eso es un fallo mayor"});
+                text: "Es es un " + dice + " natural..."});
             $("#barraHistorial").prepend(`<div class="tirada">
-                                                <p> Tu tirada es de: ${dice} </p>
-                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <p>Tu total es ${final} . Eso es un fallo mayor </p>
-                                            </div>`)
-            ensenaTirada();
-            break;
-        case final >= 6 && final <= 9:
-            swal(   {title: atriget[stat].atributo,
-                    text: "tu total es " + final + " eso es un fallo"});
-            $("#barraHistorial").prepend(`<div class="tirada">
-                                                <p> Tu tirada es de: ${dice} </p>
-                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <p>Tu total es ${final} . Eso es un fallo </p>
-                                            </div>`)
-            ensenaTirada();
-            break;
-        case final >= 10 && final <= 15:
-            swal(   {title: atriget[stat].atributo,
-                    text: "tu total es " + final + " eso es una tirada pasable"});
-            $("#barraHistorial").prepend(`<div class="tirada">
-                                                <p> Tu tirada es de: ${dice} </p>
-                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <p>Tu total es ${final} . Eso es una tirada pasable </p>
-                                            </div>`)
-            ensenaTirada();
-            break;
-        case final >= 16 && final <= 19:
-            swal(   {title: atriget[stat].atributo,
-                    text: "tu total es " + final + " eso es un exito!"});
-            $("#barraHistorial").prepend(`<div class="tirada">
-                                                <p> Tu tirada es de: ${dice} </p>
-                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <p>Tu total es ${final} . Eso es un exito! </p>
-                                            </div>`)
-            ensenaTirada();
-            break;
-        case final >= 20:
-            swal(   {title: atriget[stat].atributo,
-                    text: "tu total es " + final + " eso es un EXITO CRITICO!"});
-            $("#barraHistorial").prepend(`<div class="tirada">
-                                                <p> Tu tirada es de: ${dice} </p>
-                                                <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
-                                                <p>Tu total es ${final} . Eso es un EXITO CRITICO! </p>
-                                                <i class="fa-brands fa-critical-role fa-lg"></i>
-                                            </div>`)
-            ensenaTirada();
-            break;
+                                            <p> Tu tirada es de: ${dice} </p>
+                                            <p> ES NATURAL... </p>
+                                            <p>Eso es un FALLO CRITICO TOTAL! </p>
+                                            <i class="fa-solid fa-poo fa-lg"></i>
+                                        </div>`)
+        ensenaTirada();
+        }        
+    } else {
+        final = Number(dice) + Number(atriget[stat].modificador);
+        console.log(final);
+        switch (true){
+            case final <= 1:
+                swal(   {title: atriget[stat].atributo,
+                        text: "tu total es " + final + " eso es un fallo critico"});
+                $("#barraHistorial").prepend(`<div class="tirada">
+                                                    <p> Tu tirada es de: ${dice} </p>
+                                                    <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                    <p>Tu total es ${final} . Eso es un fallo critico. </p>
+                                                </div>`)
+                ensenaTirada();
+                break;
+            case final >= 2 && final <= 5:
+                swal(   {title: atriget[stat].atributo,
+                        text: "tu total es " + final + " eso es un fallo mayor"});
+                $("#barraHistorial").prepend(`<div class="tirada">
+                                                    <p> Tu tirada es de: ${dice} </p>
+                                                    <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                    <p>Tu total es ${final} . Eso es un fallo mayor </p>
+                                                </div>`)
+                ensenaTirada();
+                break;
+            case final >= 6 && final <= 9:
+                swal(   {title: atriget[stat].atributo,
+                        text: "tu total es " + final + " eso es un fallo"});
+                $("#barraHistorial").prepend(`<div class="tirada">
+                                                    <p> Tu tirada es de: ${dice} </p>
+                                                    <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                    <p>Tu total es ${final} . Eso es un fallo </p>
+                                                </div>`)
+                ensenaTirada();
+                break;
+            case final >= 10 && final <= 15:
+                swal(   {title: atriget[stat].atributo,
+                        text: "tu total es " + final + " eso es una tirada pasable"});
+                $("#barraHistorial").prepend(`<div class="tirada">
+                                                    <p> Tu tirada es de: ${dice} </p>
+                                                    <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                    <p>Tu total es ${final} . Eso es una tirada pasable </p>
+                                                </div>`)
+                ensenaTirada();
+                break;
+            case final >= 16 && final <= 19:
+                swal(   {title: atriget[stat].atributo,
+                        text: "tu total es " + final + " eso es un exito!"});
+                $("#barraHistorial").prepend(`<div class="tirada">
+                                                    <p> Tu tirada es de: ${dice} </p>
+                                                    <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                    <p>Tu total es ${final} . Eso es un exito! </p>
+                                                </div>`)
+                ensenaTirada();
+                break;
+            case final >= 20:
+                swal(   {title: atriget[stat].atributo,
+                        text: "tu total es " + final + " eso es un EXITO CRITICO!"});
+                $("#barraHistorial").prepend(`<div class="tirada">
+                                                    <p> Tu tirada es de: ${dice} </p>
+                                                    <p> Tu ${atri} es de ${val} y tu modificador es ${modi} </p>
+                                                    <p>Tu total es ${final} . Eso es un EXITO CRITICO! </p>
+                                                </div>`)
+                ensenaTirada();
+                break;
+        }
     }
 }

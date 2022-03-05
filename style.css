@@ -88,6 +88,7 @@ body{
     border-bottom: .3rem solid black ;
     border-right: .3rem solid black;
 }
+
 .tirada{
     display: none;
     background-image: url(imagenes/parchment.jpg);
